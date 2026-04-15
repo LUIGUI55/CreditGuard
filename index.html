@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Guard | Risk Analysis System</title>
+    <meta name="description" content="Sistema experto de análisis de riesgo crediticio con inteligencia artificial.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="dashboard-container">
+        <header class="header-section">
+            <h1>Credit Guard <span>Systema</span></h1>
+            <p>Análisis Avanzado de Riesgo e Incumplimiento</p>
+            <div class="theme-toggle-container">
+                <button type="button" id="themeToggle" class="theme-toggle-btn">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeText">Modo Obscuro</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="premium-card">
+            <form id="predictionForm">
+                <!-- Información Personal -->
+                <div class="form-group">
+                    <div class="section-header">
+                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <h3>Información del Cliente</h3>
+                    </div>
+                    <div class="input-grid">
+                        <div class="field">
+                            <label for="LIMIT_BAL">Límite de Crédito</label>
+                            <input type="number" id="LIMIT_BAL" name="LIMIT_BAL" placeholder="Ex: 50000" required>
+                        </div>
+                        <div class="field">
+                            <label for="SEX">Género (1:M, 2:F)</label>
+                            <input type="number" id="SEX" name="SEX" min="1" max="2" value="1" required>
+                        </div>
+                        <div class="field">
+                            <label for="EDUCATION">Educación (1-4)</label>
+                            <input type="number" id="EDUCATION" name="EDUCATION" min="1" max="4" value="1" required>
+                        </div>
+                        <div class="field">
+                            <label for="MARRIAGE">Estado Civil (1-3)</label>
+                            <input type="number" id="MARRIAGE" name="MARRIAGE" min="1" max="3" value="1" required>
+                        </div>
+                        <div class="field">
+                            <label for="AGE">Edad</label>
+                            <input type="number" id="AGE" name="AGE" min="18" max="100" value="30" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial -->
+                <div class="form-group">
+                    <div class="section-header">
+                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        <h3>Estatus de Pagos (Meses -1 a -6)</h3>
+                    </div>
+                    <div class="input-grid-compact">
+                        <div class="field"><label>SEP</label><input type="number" id="PAY_0" name="PAY_0" value="0"
+                                required></div>
+                        <div class="field"><label>AGO</label><input type="number" id="PAY_2" name="PAY_2" value="0"
+                                required></div>
+                        <div class="field"><label>JUL</label><input type="number" id="PAY_3" name="PAY_3" value="0"
+                                required></div>
+                        <div class="field"><label>JUN</label><input type="number" id="PAY_4" name="PAY_4" value="0"
+                                required></div>
+                        <div class="field"><label>MAY</label><input type="number" id="PAY_5" name="PAY_5" value="0"
+                                required></div>
+                        <div class="field"><label>ABR</label><input type="number" id="PAY_6" name="PAY_6" value="0"
+                                required></div>
+                    </div>
+                </div>
+
+                <!-- Montos -->
+                <div class="form-group">
+                    <div class="section-header">
+                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        <h3>Saldos de Factura (BILL_AMT)</h3>
+                    </div>
+                    <div class="input-row">
+                        <input type="number" id="BILL_AMT1" name="BILL_AMT1" placeholder="SEP" value="0" required>
+                        <input type="number" id="BILL_AMT2" name="BILL_AMT2" placeholder="AGO" value="0" required>
+                        <input type="number" id="BILL_AMT3" name="BILL_AMT3" placeholder="JUL" value="0" required>
+                        <input type="number" id="BILL_AMT4" name="BILL_AMT4" placeholder="JUN" value="0" required>
+                        <input type="number" id="BILL_AMT5" name="BILL_AMT5" placeholder="MAY" value="0" required>
+                        <input type="number" id="BILL_AMT6" name="BILL_AMT6" placeholder="ABR" value="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="section-header">
+                        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <h3>Pagos Efectuados (PAY_AMT)</h3>
+                    </div>
+                    <div class="input-row">
+                        <input type="number" id="PAY_AMT1" name="PAY_AMT1" placeholder="SEP" value="0" required>
+                        <input type="number" id="PAY_AMT2" name="PAY_AMT2" placeholder="AGO" value="0" required>
+                        <input type="number" id="PAY_AMT3" name="PAY_AMT3" placeholder="JUL" value="0" required>
+                        <input type="number" id="PAY_AMT4" name="PAY_AMT4" placeholder="JUN" value="0" required>
+                        <input type="number" id="PAY_AMT5" name="PAY_AMT5" placeholder="MAY" value="0" required>
+                        <input type="number" id="PAY_AMT6" name="PAY_AMT6" placeholder="ABR" value="0" required>
+                    </div>
+                </div>
+
+                <div class="action-section">
+                    <button type="submit" id="calculateBtn" class="btn-primary">EJECUTAR ANÁLISIS DE RIESGO</button>
+                    <div class="secondary-actions">
+                        <button type="button" id="autoBtn" class="btn-secondary">Generar Aleatoreamente</button>
+                        <button type="button" id="clearBtn" class="btn-secondary">Limpiar Formulario</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section id="resultSection" class="premium-card result-section hidden">
+            <div class="result-content">
+                <div id="resultIcon" class="result-icon"></div>
+                <div class="result-text">
+                    <h2 id="resultTitle">Reporte de Análisis</h2>
+                    <p id="resultDescription"></p>
+                    <div class="probability-bar">
+                        <label>Índice de Incumplimiento: <strong id="probValue">0%</strong></label>
+                        <div class="progress-track">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <button type="button" id="shutdownBtn" class="btn-shutdown">Apagar Servidor API</button>
+
+        <footer class="footer">
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
