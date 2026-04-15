@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearBtn = document.getElementById('clearBtn');
     const shutdownBtn = document.getElementById('shutdownBtn');
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
     const themeText = document.getElementById('themeText');
 
     // Theme Switcher Logic
@@ -22,10 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('selected-theme', theme);
         
         if (theme === 'dark') {
-            themeIcon.textContent = '☀️';
             themeText.textContent = 'Modo Claro';
         } else {
-            themeIcon.textContent = '🌙';
             themeText.textContent = 'Modo Obscuro';
         }
     }
