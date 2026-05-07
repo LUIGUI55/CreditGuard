@@ -79,6 +79,14 @@ def predict(data: PredictionInput):
     if model is None or scaler is None:
         raise HTTPException(status_code=503, detail="Model not loaded. Please run the training script first.")
     
+    # Regla de negocio: Edad fuera de rango
+    if data.AGE < 18 or data.AGE > 79:
+        return {
+            "default_prediction": 1,
+            "probability": 1.0,
+            "message": f"CRÉDITO DENEGADO: La edad del solicitante ({data.AGE} años) no es válida. Debe tener entre 18 y 79 años."
+        }
+
     # Prepare input data
     input_list = [
         data.LIMIT_BAL, data.SEX, data.EDUCATION, data.MARRIAGE, data.AGE,
@@ -96,7 +104,8 @@ def predict(data: PredictionInput):
     
     return {
         "default_prediction": int(prediction[0]),
-        "probability": float(probability[0])
+        "probability": float(probability[0]),
+        "message": "Crédito evaluado exitosamente."
     }
 
 if __name__ == "__main__":
